@@ -1,0 +1,31 @@
+import RPi.GPIO as GPIO
+import time
+
+
+class Servo:
+    pin = 12
+    closedPosition = 12
+    openPosition = 2
+
+    def __init__(self):
+        GPIO.setmode(GPIO.BOARD)
+        GPIO.setup(self.pin, GPIO.OUT)
+        self.pwm = GPIO.PWM(self.pin, 50)
+        self.pwm.start(self.closedPosition)
+
+    def set_position(degree):
+        if degree < 0 and degree > 180:
+            print("Value must be between 0° and 180°.")
+        else:
+            position = degree / 360 * 10 + 2
+            self.pwm.ChangeDutyCycle(self.position)
+            time.sleep(0.5)  # Time needed to reach position
+
+    def shutdown(self):
+        self.pwm.stop()
+        GPIO.cleanup()
+
+
+s = Servo()
+s.set_position(3)
+s.shutdown()

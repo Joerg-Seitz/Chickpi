@@ -1,0 +1,5 @@
+opening_time: "09:30"
+closing_time: "21:00"
+feeding_times:
+  - "09:00"
+  - "20:40"
