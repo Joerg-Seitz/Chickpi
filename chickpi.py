@@ -14,19 +14,23 @@ class Chickpi(Resource):
     def feed(self):
         servo = Servo()
         servo.set_position(108)
-        time.sleep(0.4)  # feeding
+        time.sleep(cfg["feeding_factor"])
         servo.set_position(0)
         servo.shutdown()
 
     def open_door(self):
         stepper = Stepmotor()
-        stepper.rotate(7200)
+        stepper.rotate(doorheight_in_degrees())
         stepper.shutdown()
 
     def close_door(self):
         stepper = Stepmotor()
-        stepper.rotate(-7200)
+        stepper.rotate(-doorheight_in_degrees())
         stepper.shutdown()
+
+    def doorheight_to_degrees(self):
+        rotations = cfg["door_open_height_in_mm"] / 25.13  # Measured spool circumfence
+        return rotations * 360
 
 
 # Run it

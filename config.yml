@@ -1,5 +1,7 @@
 opening_time: "09:30"
 closing_time: "21:00"
+door_pullup_height_in_cm: 30
+feeding_factor: 0.4 # Time in seconds during which grain falls through the feeder.
 feeding_times:
   - "09:00"
   - "20:40"
